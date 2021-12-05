@@ -3,18 +3,42 @@ const {
 } = require('../book-collection.js');
 
 describe('getBooksByGenre', () => {
+    const books = [
+        {
+            name: 'The Princess Bride',
+            genre: 'Fantasy',
+            author: 'William Goldman'
+        },
+        {
+            name: 'Artemis Fowl',
+            genre: 'Fantasy',
+            author: 'Eoin Colfer'
+        },
+        {
+            name: 'Other',
+            genre: 'Horror',
+            author: 'Some Bloke'
+        }
+    ];
+
+    const genres = [
+        'Fantasy',
+        'Horror',
+        'Sci-Fi'
+    ]
+
     test('returns an array', () => {
-        expect(Array.isArray(getBooksByGenre())).toEqual(true);
+        expect(Array.isArray(getBooksByGenre(books, genres[0]))).toEqual(true);
     });
     test('returns an empty array when there are no books with that genre', () => {
-        expect(getBooksByGenre('crime/thriller')).toEqual([]);
+        expect(getBooksByGenre(books, genres[2])).toEqual([]);
     });
     test('returns the right books when the genre does exist', () => {
-        expect(getBooksByGenre('horror')).toEqual([
+        expect(getBooksByGenre(books, genres[1])).toEqual([
             {
-                name: 'The Princess Bride',
+                name: 'Other',
                 genre: 'Horror',
-                author: 'Romy Greenfield'
+                author: 'Some Bloke'
             }
         ]);
     });
